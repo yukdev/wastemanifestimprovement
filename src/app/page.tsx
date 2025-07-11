@@ -158,6 +158,7 @@ export default function Home() {
   // File upload handler
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    console.log('File selected:', file);
     if (!file) return;
     const ext = file.name.split('.').pop()?.toLowerCase();
     setError(null);
@@ -166,23 +167,30 @@ export default function Home() {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
+          console.log('Parsed CSV results:', results);
           setManifestData(results.data as Record<string, string>[]);
+        },
+        error: (err) => {
+          console.error('PapaParse error:', err);
         },
       });
     } else if (ext === 'xls' || ext === 'xlsx') {
       const reader = new FileReader();
       reader.onload = (evt) => {
+        console.log('FileReader loaded:', evt);
         const data = new Uint8Array(evt.target?.result as ArrayBuffer);
         const workbook = XLSX.read(data, { type: 'array' });
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const json = XLSX.utils.sheet_to_json<Record<string, string>>(sheet, {
           defval: '',
         });
+        console.log('Parsed XLSX results:', json);
         setManifestData(json);
       };
       reader.readAsArrayBuffer(file);
     } else {
       setError('Unsupported file type. Please upload a CSV or Excel file.');
+      console.error('Unsupported file type:', ext);
     }
   };
 
