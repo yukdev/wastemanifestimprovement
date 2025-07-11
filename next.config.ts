@@ -1,7 +1,10 @@
-const nextConfig: import('next').NextConfig = {
+const isGithubPages = process.env.GITHUB_PAGES === 'true';
+
+const nextConfig = {
   output: 'export',
-  basePath: '/wmi',
-  assetPrefix: '/wmi/',
+  // Only set these for GitHub Pages!
+  basePath: isGithubPages ? '/wastemanifestimprovement' : '',
+  assetPrefix: isGithubPages ? '/wastemanifestimprovement/' : '',
 };
 
 export default nextConfig;
