@@ -6,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next build && next export",
-    "deploy": "next build && gh-pages -d out"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,7 +20,6 @@
     "react-dom": "^19.0.0",
     "xlsx": "^0.18.5"
   },
-  "homepage": "https://yukdev.github.io/wmi",
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/file-saver": "^2.0.7",
@@ -32,7 +29,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
-    "gh-pages": "^6.3.0",
     "typescript": "^5"
   }
 }
